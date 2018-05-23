@@ -1,0 +1,115 @@
+Implémentation des algorithmes de Parcoursup
+============================================
+
+
+
+Modèle: lien entre les classes Java et la base de données
+_______________________________________________________
+
+La base identifie:
+
+    * chaque candidat par un G_CN_COD
+    * chaque formation d'inscription par un G_TI_COD
+    * chaque formation d'affectation par un G_TA_COD
+    * chaque commission de classement pédagogique des voeux par un C_GP_COD
+    * chaque commission de classement internat des voeux par un C_GI_COD
+
+Remarque: selon les configurations, un même internat peut être partagé par 
+plusieurs formations et une même formation peut s'appuyer sur
+un unique internat mixte ou deux internats filles/garçons.
+Pour une formation donnée, un candidat donné a accès à au plus un internat.
+
+Le lien entre ces identifiants et les classes de l'algo sont
+
+    GroupeClassement ~ G_CN_COD
+    VoeuClasse ~ (G_CN_COD,C_GP_COD)
+    VoeuEnAttente ~  VoeuUID ~ (G_CN_COD, G_TA_COD, I_RH_COD)
+    GroupeAffectation ~  GroupeAffectationUID ~ (C_GP_COD, G_TI_COD, G_TA_COD)
+    GroupeInternat ~  GroupeInternatUID ~ (C_GI_COD, NVL(G_TA_COD,0) )
+
+Algorithme OrdreAppel:
+______________________
+
+    Le point d'entrée (main) est dans "java/parcoursup/ordreappel/CalculOrdreAppel.java".
+
+    Le calcul de l'ordre d'appel est effectué indépendamment dans chaque groupe de classement.
+    Le code récupère les groupes de classement, puis les voeux et injecte les voeux
+    dans les groupes de classement correspondant.
+
+Algorithme EnvoiPropositions:
+_____________________________
+
+    Le point d'entrée (main) est dans "java/parcoursup/propositions/EnvoiPropositions.java".
+
+    Pour les formations sans internat il suffit simplement de descendre dans
+    l'ordre d'appel tant que la formation n'est pas en surcapacité ou que le rang
+    limite d'appel n'est pas atteint.
+
+    Pour les formations avec internat, il faut en plus calculer la valeur de la
+    position d'admission, comme spécifié dans le doc algos. Cette position d'admission,
+    propre à chaque GroupeInternat, paramètre l'assiette des candidats éligibles
+    à une place dans cet internat. 
+
+    Le calcul de la position d'admission réalise un 
+    compromis entre plusieurs contraintes:
+
+        * respecter les capacités des internats
+        * proposer les places d'internat dans l'ordre du classement internat
+        * avoir des internats remplis en fin de campagne.
+    
+    Elle est inférieure à une position maximum
+    d'admission, qui est augmentée progressivement.
+    Le premier jour, on s'en tient à la liste principale de l'internat: dans
+    un internat de 20 places, la position maximum d'admission est fixée à 20 et
+    seuls les 20 premiers du classement sont susceptibles 
+    de recevoir une proposition d'internat. Certains de ces 20 premiers
+    sont peut-être trop bas dans les classements pédagogiques pour pouvoir
+    recevoir une proposition d'une formation. Dans ce cas, les lits correspondants 
+    sont réservés. Mais pas éternellement: on augmente progressivement la maximum
+    d'admission pour qu'après 30 jours, l'assiette des candidats éligibles soit maximale.
+    Cette ouverture peut-être freinée (mais pas accélérée) par le chef d'établissement,
+    via un pourcentage d'ouverture. Plus de détails sont disponibles dans doc/presentation_algos.pdf
+
+    
+    La position d'admission est calculée de manière à être la plus
+    permissive possible, dans la limite des capacités des internats et de la barre
+    maximum d'admission. Elle est calculée itérativement, en partant de la position
+    maximum est en la diminuant en cas de surcapacité. On peut prouver mathématiquement
+    que ce calcul converge toujours vers le même résultat, quelque soit l'ordre
+    dans lequel on effectue les itérations sur les listes de formations et
+    d'internats. 
+
+    Le chargement des données depuis la base Oracle injecte les voeux dans
+    les groupes correspondants, a minima un GroupeAffectation 
+    voire en plus un GroupeInternat si 
+        
+        * I_RH_COD=1 (le voeu comprend une demande d'internat)
+        * g_ti_cla_int_uni IN (0,1) l'internat correspondant n'est ni obligatoire ni non-sélectif,
+            c'est un internat normal, typiquement un internat de CPGE.
+
+    Dans chaque groupe, les voeux sont triés par ordre de classement, 
+    pédagogique ou internat.
+
+    L'algorithme itére la mise à jour des positions d'admission,
+    jusqu'à ce qu'aucun des internats ne soit en surcapacité.
+
+    Deux détails qui ont leur importance.
+    Quand l'algorithme énumère les voeux
+    d'un GroupeAffectation dans l'ordre de classement pédagogique,
+    il prend garde aux doublons de candidats: deux voeux d'un même candidat pour
+    la formation, (un avec et un sans internat), peuvent se succéder.
+    Quand l'algorithme énumère les voeux
+    d'un GroupeInternat dans l'ordre de classement internat,
+    il prend garde aux candidatures multiples: plusieurs voeux d'un même candidat pour 
+    le même internat mais dans plusieurs formations distinctes (MPSI/PCSI/...)
+    peuvent se succéder dans la liste de voeux.
+
+Hugo G. <hugo.gimbert@enseignement.gouv.fr>
+
+Merci aux relecteurs du code:
+
+	   claire@college_de_france
+	   olivier@rhoban
+	   serge@parcoursup
+	   ms@pdp
+
