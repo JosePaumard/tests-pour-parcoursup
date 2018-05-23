@@ -47,12 +47,12 @@ public abstract class ExempleOrdreAppel {
         JAXBContext jc = JAXBContext.newInstance(AlgoOrdreAppelEntree.class);
         Marshaller m = jc.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        m.marshal(entree, new File(nom() + "_entree.xml"));
+        m.marshal(entree, new File("xml/" + nom() + "_entree.xml"));
 
         jc = JAXBContext.newInstance(AlgoOrdreAppelSortie.class);
         m = jc.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        m.marshal(sortie, new File(nom() + "_sortie.xml"));
+        m.marshal(sortie, new File("xml/" + nom() + "_sortie.xml"));
         
     }
 
