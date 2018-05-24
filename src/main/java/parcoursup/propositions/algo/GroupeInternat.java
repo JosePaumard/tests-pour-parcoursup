@@ -112,27 +112,7 @@ public class GroupeInternat {
         int t = nbJoursCampagne;
         int p = pourcentageOuverture;
 
-        final int assietteAdmission;
-
-        if (M <= L) {
-            assietteAdmission = M;
-        } else if (t == 1) {
-            /* le premier jour on s'en tient aux lits disponibles */
-            assietteAdmission = L;
-        } else if (t <= 30) {
-            /* les 30 jours suivants, on élargit progressivement
-            l'assiette, en tenant compte de la correction du proviseur */
-            assietteAdmission
-                    = L + (M - L) * (t - 1) * p / 100 / 30;
-        } else if (t < 60) {
-            /* les 29 jours suivants, l'assiette est maximale,
-            possiblement réduite par la correction du proviseur */
-            assietteAdmission
-                    = L + (M - L) * p / 100;
-        } else {
-            /* finalement, l'assiette est maximale */
-            assietteAdmission = M;
-        }
+        final int assietteAdmission = getAssietteAdmission(M, L, t, p);
 
         this.contingentAdmission = Integer.max(0, assietteAdmission - candidatsAffectes.size());
 
@@ -195,6 +175,31 @@ public class GroupeInternat {
 
         estInitialise = true;
 
+    }
+
+    public int getAssietteAdmission(int m, int l, int t, int p) {
+        final int assietteAdmission;
+
+        if (m <= l) {
+            assietteAdmission = m;
+        } else if (t == 1) {
+            /* le premier jour on s'en tient aux lits disponibles */
+            assietteAdmission = l;
+        } else if (t <= 30) {
+            /* les 30 jours suivants, on élargit progressivement
+            l'assiette, en tenant compte de la correction du proviseur */
+            assietteAdmission
+                    = l + (m - l) * (t - 1) * p / 100 / 30;
+        } else if (t < 60) {
+            /* les 29 jours suivants, l'assiette est maximale,
+            possiblement réduite par la correction du proviseur */
+            assietteAdmission
+                    = l + (m - l) * p / 100;
+        } else {
+            /* finalement, l'assiette est maximale */
+            assietteAdmission = m;
+        }
+        return assietteAdmission;
     }
 
     /* Met à jour la position d'admission si nécessaire.
