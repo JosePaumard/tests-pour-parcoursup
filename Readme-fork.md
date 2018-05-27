@@ -8,6 +8,8 @@ Cette publication en open source est sans aucun doute bienvenue, mais on peut au
 
 En tant que développeur, on peut également être frustré par la structure du projet Java en lui-même : l'absence de test notamment.  
 
+Cela dit, l'objectif premier de la publication de Parcoursup étant de satisfaire à des contraintes légales, on ne peut pas dire ce rôle n'est pas rempli, et l'on ne peut que saluer cette initiative, qui a le mérite de la transparence. 
+
 #### Objectifs
 
 Mon objectif est simplement de montrer qu'à partir du jeu de spécifications fournies dans le document PDF qui accompagne le code Java, il est possible, en suivant les règles du Behavior Driven Development telles qu'énoncées par Kent Beck et Dan North au tout début des années 2000, on peut écrire un jeu de tests qui permettent de valider la correction du fonctionnement de l'algorithme impémenté. 
