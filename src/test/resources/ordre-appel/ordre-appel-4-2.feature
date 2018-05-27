@@ -2,7 +2,21 @@ Feature: Algorithme de calcul de l'ordre d'appel section 4.2
   Calcul de l'ordre d'appel dans un groupe soumis
   à deux taux, boursiers et non-résidents
 
-  Scenario Template: Choix du premier candidat
+  Les tests sont rangés dans quatre groupes, suivant
+  que le taux de boursier ou de non-résident est contraignant
+  ou non.
+  Dans tous les cas, on teste que la relation de récurrence
+  est bien vérifiée, ce qui suffit à prouver que l'implémentation
+  suit bien les spécifications.
+  On teste tous les cas, y compris dégénérés, lorsque l'on n'a
+  qu'un candidat dans la liste.
+  La convention est la suivante :
+  - C est un candidat ni boursier ni non-résident
+  - B est un candidat boursier non non-résident
+  - R est un candidat non boursier et non-résident
+  - T est un candidat boursier et non-résident
+
+  Scenario Template: Vérification de l'ordre d'appel
     Given les candidats sont <liste_candidats>
     And le taux minimum de boursiers est 0
     And le taux minimum de résidents est 0
@@ -87,6 +101,13 @@ Feature: Algorithme de calcul de l'ordre d'appel section 4.2
 
       | C1 C2           | C1 C2       |
       | C1 C2           | C1 C2       |
+
+      | C1              | C1          |
+
+      | B1              | B1          |
+
+      | T1              | T1          |
+
 
   Scenario Template: Choix du premier candidat
     Given les candidats sont <liste_candidats>
@@ -174,6 +195,11 @@ Feature: Algorithme de calcul de l'ordre d'appel section 4.2
       | C1 C2           | C1 C2       |
       | C1 C2           | C1 C2       |
 
+      | C1              | C1          |
+
+      | B1              | B1          |
+
+      | T1              | T1          |
 
   Scenario Template: Choix du premier candidat
     Given les candidats sont <liste_candidats>
@@ -261,6 +287,12 @@ Feature: Algorithme de calcul de l'ordre d'appel section 4.2
       | C1 C2           | C1 C2       |
       | C1 C2           | C1 C2       |
 
+      | C1              | C1          |
+
+      | B1              | B1          |
+
+      | T1              | T1          |
+
 
   Scenario Template: Choix du premier candidat
     Given les candidats sont <liste_candidats>
@@ -347,3 +379,9 @@ Feature: Algorithme de calcul de l'ordre d'appel section 4.2
 
       | C1 C2           | C1 C2       |
       | C1 C2           | C1 C2       |
+
+      | C1              | C1          |
+
+      | B1              | B1          |
+
+      | T1              | T1          |

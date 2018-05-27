@@ -4,7 +4,11 @@ Feature: Algorithme de calcul de l'ordre d'appel section 4.1
 
   L'algorithme est défini par une relation de récurrence,
   il suffit donc de constater qu'il fonctionne à un rang
-  particulier.
+  particulier pour prouver qu'il est implémenté conformément
+  à la spécification.
+  La convention est la suivante :
+  - C est un candidat non boursier
+  - B est un candidat boursier
 
   Scenario Template: Cas dégénéré d'une liste d'un seul candidat
     Given les candidats sont <liste_candidats>
