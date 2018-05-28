@@ -12,7 +12,7 @@ Cela dit, l'objectif premier de la publication de Parcoursup étant de satisfair
 
 #### Objectifs
 
-Mon objectif est simplement de montrer qu'à partir du jeu de spécifications fournies dans le document PDF qui accompagne le code Java, il est possible, en suivant les règles du Behavior Driven Development telles qu'énoncées par Kent Beck et Dan North au tout début des années 2000, on peut écrire un jeu de tests qui permettent de valider la correction du fonctionnement de l'algorithme impémenté. 
+Mon objectif est simplement de montrer qu'à partir du jeu de spécifications fournies dans le document PDF qui accompagne le code Java, il est possible, en suivant les règles du Behavior Driven Development telles qu'énoncées par Kent Beck et Dan North au tout début des années 2000, on peut écrire un jeu de tests qui permettent de valider la correction du fonctionnement de l'algorithme implémenté. 
 
 Ce repository contient donc les éléments suivants : 
 - une copie de parcoursup, rangé dans un répertoire /src/main/java
