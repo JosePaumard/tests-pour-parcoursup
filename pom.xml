@@ -15,6 +15,11 @@
     </properties>
 
     <dependencies>
+        <!-- this dependency is not available
+             on classical Maven repos, you
+             need to check this page to get it
+             https://blogs.oracle.com/dev2dev/get-oracle-jdbc-drivers-and-ucp-from-oracle-maven-repository-without-ides
+             -->
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
