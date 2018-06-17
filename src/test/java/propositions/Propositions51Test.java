@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
         dryRun = false,
         format = {"pretty", "html:target/cucumber"},
         features = {"classpath:propositions/"},
-        glue = {"propositions"}
+        glue = {"propositions"},
+        tags = {"@Bmax, @Internat"}
 )
 public class Propositions51Test {
 }

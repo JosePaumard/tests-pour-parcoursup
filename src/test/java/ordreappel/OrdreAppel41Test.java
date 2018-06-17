@@ -24,7 +24,8 @@ import org.junit.runner.RunWith;
         dryRun = false,
         format = {"pretty", "html:target/cucumber"},
         features = {"classpath:ordre-appel/"},
-        glue = {"ordreappel"}
+        glue = {"ordreappel"},
+        tags = {"@OrdreAppelBoursiersLocaux, @OrdreAppel"}
 )
 public class OrdreAppel41Test {
 }

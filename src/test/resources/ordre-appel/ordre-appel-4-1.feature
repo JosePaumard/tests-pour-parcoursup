@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+@OrdreAppel
 Feature: Algorithme de calcul de l'ordre d'appel section 4.1
   Calcul de l'ordre d'appel dans un groupe soumis
   au seul taux minimum de boursiers.

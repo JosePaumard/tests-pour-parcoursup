@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+@OrdreAppelBoursiersLocaux
 Feature: Algorithme de calcul de l'ordre d'appel section 4.2
   Calcul de l'ordre d'appel dans un groupe soumis
   à deux taux, boursiers et non-résidents

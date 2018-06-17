@@ -12,10 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+@Internat
 Feature: Gestion des internats section 5.1
   Algorithme quotidien Internat étant donné la position d’admission B
 
-      # Attention, B ne doit pas être plus grand que le nombre de candidats avec internat
+  Les tests sont répartis en sections, dans des scénarios qui regroupent des formations
+  partageant les mêmes caractéristiques :
+  - le rang limite de proposition est-il plus grand ou plus petit que la capacité
+    d'accueil de la formation ?
+  - l'internat a-t-il une capacité d'accueil plus grande ou plus petite que le nombre
+    de candidats ?
+  - la valeur de B est-elle plus petite ou égale au nombre de candidats ?
+  - la valeur de B est-elle plus grande ou plus petite que la capacité d'accueil de l'internat.
+
+  Par nature, B ne doit pas être plus grand que le nombre de candidats avec internat
 
   @1.1
   Scenario Template: Gestion des internats à capacité d'accueil suffisante

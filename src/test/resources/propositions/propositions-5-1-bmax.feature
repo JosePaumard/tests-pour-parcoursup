@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+@Bmax
 Feature: Algorithme de calcul de la position max d'admission d'un internat
   Algorithme de calcul de la position maximum d’admission Bmax
 
