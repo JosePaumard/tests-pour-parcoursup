@@ -24,6 +24,15 @@ J'insiste sur le fait que les tests Gherkin / Cucumber ont été écrits à part
 
 #### Etat actuel du projet
 
-En cet état de la publication, un peu plus de 400 tests ont été écrits, qui portent essentiellement sur les algorithmes de la section 4. Ils couvrent l'appel des candidats pour les groupes de formation ne possédant par d'internat.
+La section 4 est couverte par 260 tests. L'algorithme porte sur l'appel des candidats en fonction des critères suivants : 
+- le classement;
+- le fait que le candidat est boursier ou non;
+- le fait que le candidat est local ou non. 
 
-La section 5 définit les algorithmes d'appel des candidats aux groupes de formations comportant des internats. Je suis en train d'écrire ces tests et les publierai lorsqu'ils seront prêts.  
+La section 5 comporte la définition de 2 algorithmes : 
+- le calcul d'un paramètre B, qui constitue le classement du dernier candidat appelé dans pour une formation. On comprend que ce classement doit progresser au fur et à mesure que les candidats acceptent des formations, et par ricochet, se désistent pour d'autres. Dans la pratique, une formation de 50 places ne recrute que rarement les 50 premiers candidats qu'elle reçoit. 72 tests valident le cacul de B. 
+- ce calcul du paramètre B est ensuite utilisé pour appeler des candidats aux formations Parcoursup. Cet ordre d'appel est assez complexe, et rendu encore plus complexe si les formations comportent des internats. Cette partie est couverte par 64 tests.  
+
+#### Remerciement
+
+Je tiens à remercier Hugo Gimbert, auteur de Parcoursup, pour son aimable soutien dans son travail. 
