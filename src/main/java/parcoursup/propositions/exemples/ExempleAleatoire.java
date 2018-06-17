@@ -385,7 +385,7 @@ public class ExempleAleatoire extends ExemplePropositions {
         JAXBContext jc = JAXBContext.newInstance(AlgoPropositionsEntree.class);
         Marshaller m = jc.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        m.marshal(entree, new File(nom() + "_entree.xml"));
+        m.marshal(entree, new File("xml/" + nom() + "_entree.xml"));
         
         return entree;
 

@@ -45,8 +45,8 @@ public abstract class ExemplePropositions {
         AlgoPropositionsSortie sortie
                 = AlgoPropositions.calculePropositions(entree);
 
-        entree.serialiser(nom() + "_entree.xml");
-        sortie.serialiser(nom() + "_sortie.xml");
+        entree.serialiser("xml/" + nom() + "_entree.xml");
+        sortie.serialiser("xml/" + nom() + "_sortie.xml");
 
     }
 
